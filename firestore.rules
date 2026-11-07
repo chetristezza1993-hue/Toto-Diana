@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.uid == "REPLACE_WITH_ADMIN_FIREBASE_UID";
+    }
+
+    match /games/toto-diana/predictions/{predictionId} {
+      allow read: if true;
+      allow create: if request.auth != null
+        && request.resource.data.ownerUid == request.auth.uid;
+      allow update: if request.auth != null
+        && request.resource.data.ownerUid == resource.data.ownerUid
+        && (resource.data.ownerUid == request.auth.uid || isAdmin());
+      allow delete: if request.auth != null
+        && (resource.data.ownerUid == request.auth.uid || isAdmin());
+    }
+
+    match /games/toto-diana/public/{documentId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}
