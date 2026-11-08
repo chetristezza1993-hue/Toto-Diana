@@ -1,0 +1,1 @@
+.whatsapp-share{background:#25d366;color:#17351f}.whatsapp-share::before{content:'↗';display:inline-grid;place-items:center;width:24px;height:24px;margin-right:7px;border:2px solid currentColor;border-radius:50%;font-weight:900}@media(max-width:760px){.hero-copy .actions{display:grid;grid-template-columns:1fr 1fr}.hero-copy .whatsapp-share{grid-column:1/-1}}
