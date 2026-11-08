@@ -47,5 +47,10 @@
     await mods.setDoc(mods.doc(db,'games',gameId,'public','state'),{settings,actual:actual||null,updatedAt:mods.serverTimestamp()},{merge:true});
     return true;
   }
-  window.TotoSync={enabled:!!cfg.enabled,init,savePrediction,adminSignIn,saveAdminState};
+  async function adminUpdatePrediction(id,prediction){
+    if(!db||!adminUser)throw new Error('Accedi prima con l’account Google amministratore.');
+    await mods.updateDoc(mods.doc(db,'games',gameId,'predictions',id),{prediction,updatedAt:mods.serverTimestamp()});
+    return true;
+  }
+  window.TotoSync={enabled:!!cfg.enabled,init,savePrediction,adminSignIn,saveAdminState,adminUpdatePrediction};
 })();
