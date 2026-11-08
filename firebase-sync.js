@@ -13,7 +13,7 @@
     mods={...app,...authMod,...firestore};
     const firebaseApp=mods.initializeApp(cfg.firebase);
     auth=mods.getAuth(firebaseApp);db=mods.getFirestore(firebaseApp);
-    await mods.authStateReady(auth);user=auth.currentUser||(await mods.signInAnonymously(auth)).user;
+    await auth.authStateReady();user=auth.currentUser||(await mods.signInAnonymously(auth)).user;
     return true;
   }
   async function init(handlers={}){
