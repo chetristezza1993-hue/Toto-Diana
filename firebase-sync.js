@@ -39,8 +39,8 @@
     if(!auth)return false;
     if(user&&!user.isAnonymous){adminUser=user;return true}
     const provider=new mods.GoogleAuthProvider();
-    const result=await mods.linkWithPopup(user,provider);
-    adminUser=result.user;return true;
+    const result=await mods.signInWithPopup(auth,provider);
+    adminUser=result.user;user=result.user;return true;
   }
   async function saveAdminState(settings,actual){
     if(!db||!adminUser)throw new Error('Accedi prima con l’account Google amministratore.');
