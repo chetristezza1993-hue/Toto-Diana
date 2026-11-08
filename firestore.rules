@@ -3,7 +3,7 @@ service cloud.firestore {
   match /databases/{database}/documents {
     function isAdmin() {
       return request.auth != null
-        && request.auth.uid == "REPLACE_WITH_ADMIN_FIREBASE_UID";
+        && request.auth.token.email == "chetristezza1993@gmail.com";
     }
 
     match /games/toto-diana/predictions/{predictionId} {
